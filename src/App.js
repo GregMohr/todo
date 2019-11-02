@@ -1,5 +1,7 @@
 import React from 'react';
-import Todos from './components/Todos'
+import Header from './components/layout/Header';
+import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
 import './App.css';
 
 class App extends React.Component {
@@ -18,10 +20,25 @@ class App extends React.Component {
     ]
   }
 
+  // Toggle Todo completed property
+  toggleCheck = (id) => {
+    this.setState({todos: this.state.todos.map(todo => {
+      if(todo.id === id) todo.completed = !todo.completed;
+      return todo;
+    })});
+  }
+
+  // Delete Todo from todos
+  deleteTodo = (id) => {
+    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
+  }
+
   render(){
     return (
       <div className="App">
-        <Todos todos={this.state.todos} />
+        < Header />
+        < AddTodo />
+        < Todos todos={this.state.todos} toggleCheck={this.toggleCheck} deleteTodo={this.deleteTodo} />
       </div>
     );
   }
