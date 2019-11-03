@@ -3,17 +3,18 @@ import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import './App.css';
+import uuid from 'uuid';
 
 class App extends React.Component {
   state = {
     todos: [
       {
-        id: 1,
+        id: uuid.v4(),
         title: 'Take out the trash',
         completed: false
       },
       {
-        id: 2,
+        id: uuid.v4(),
         title: 'PEPS Halloween',
         completed: false
       }
@@ -28,9 +29,19 @@ class App extends React.Component {
     })});
   }
 
-  // Delete Todo from todos
+  // Delete todo from list
   deleteTodo = (id) => {
     this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
+  }
+
+  // Add new todo item
+  addTodo = title => {
+    const newTodo = {
+      id: uuid.v4(),
+      title,
+      completed: false
+    }
+    this.setState({ todos: [...this.state.todos, newTodo] })
   }
 
   render(){
@@ -38,7 +49,7 @@ class App extends React.Component {
       <div className="App">
         <div className="container">
           < Header />
-          < AddTodo />
+          < AddTodo addTodo={this.addTodo} />
           < Todos todos={this.state.todos} toggleCheck={this.toggleCheck} deleteTodo={this.deleteTodo} />
         </div>
       </div>
