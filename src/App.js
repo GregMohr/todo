@@ -36,9 +36,11 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        < Header />
-        < AddTodo />
-        < Todos todos={this.state.todos} toggleCheck={this.toggleCheck} deleteTodo={this.deleteTodo} />
+        <div className="container">
+          < Header />
+          < AddTodo />
+          < Todos todos={this.state.todos} toggleCheck={this.toggleCheck} deleteTodo={this.deleteTodo} />
+        </div>
       </div>
     );
   }
