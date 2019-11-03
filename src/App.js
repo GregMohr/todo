@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
       .then(res => this.setState({todos: res.data}));
   }
 
@@ -28,6 +28,11 @@ class App extends React.Component {
   }
 
   // Delete todo from list
+  // Check the response on this. If it can be used to setState on todos directly,
+  // then we're not saving anything by filtering through todos after getting the response
+  // Will it be faster/more sensible to:
+  // 1: use the http response, or
+  // 2: move the todos setState outside of the async function as it's not dependant on the response
   deleteTodo = (id) => {
     axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }));

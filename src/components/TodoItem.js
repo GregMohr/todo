@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class TodoItem extends Component {
+    // Supplied completed todos get the appropriate line-through, but the checkbox is still unchecked
+    // Why do we use getStyleas a function instead of a regular object? Possibly the conditional assignment?
     getStyle = () => {
         return {
             backgroundColor: '#f4f4f4',
@@ -26,7 +28,9 @@ export class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-    todo: PropTypes.object.isRequired
+    todo: PropTypes.object.isRequired,
+    toggleCheck: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired
 }
 
 const btnStyle = {
