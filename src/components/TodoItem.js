@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class TodoItem extends Component {
-    // Supplied completed todos get the appropriate line-through, but the checkbox is still unchecked
     // Why do we use getStyle as a function instead of a regular object? Possibly the conditional assignment?
     getStyle = () => {
         return {
