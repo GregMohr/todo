@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export class TodoItem extends Component {
     // Supplied completed todos get the appropriate line-through, but the checkbox is still unchecked
-    // Why do we use getStyleas a function instead of a regular object? Possibly the conditional assignment?
+    // Why do we use getStyle as a function instead of a regular object? Possibly the conditional assignment?
     getStyle = () => {
         return {
             backgroundColor: '#f4f4f4',
@@ -14,11 +14,11 @@ export class TodoItem extends Component {
     }
 
     render() {
-        const { title, id } = this.props.todo;
+        const { title, id, completed } = this.props.todo;
         return (
             <div style={this.getStyle()}>
                 <p>
-                    <input type="checkbox" onChange={this.props.toggleCheck.bind(this, id)}/>
+                    <input type="checkbox" checked={completed} onChange={this.props.toggleCheck.bind(this, id)}/>
                     {title}
                     <button onClick={this.props.deleteTodo.bind(this, id)} style={btnStyle}>x</button>
                 </p>

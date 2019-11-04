@@ -4,7 +4,6 @@ import Header from './components/layout/Header';
 import About from './components/pages/About';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
-// import uuid from 'uuid';
 import axios from 'axios';
 
 import './App.css';
@@ -19,7 +18,7 @@ class App extends React.Component {
       .then(res => this.setState({todos: res.data}));
   }
 
-  // Toggle Todo completed property
+  // Toggle Todo completed state
   toggleCheck = (id) => {
     this.setState({todos: this.state.todos.map(todo => {
       if(todo.id === id) todo.completed = !todo.completed;
@@ -28,17 +27,12 @@ class App extends React.Component {
   }
 
   // Delete todo from list
-  // Check the response on this. If it can be used to setState on todos directly,
-  // then we're not saving anything by filtering through todos after getting the response
-  // Will it be faster/more sensible to:
-  // 1: use the http response, or
-  // 2: move the todos setState outside of the async function as it's not dependant on the response
   deleteTodo = (id) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }));
+    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res => console.log(res.data));
   }
 
-  // Add new todo item
+  // Add new todo item. Function needs response in order to add the new todo as the API is assigning id
   addTodo = title => {
     axios.post('https://jsonplaceholder.typicode.com/todos', {
       title,
